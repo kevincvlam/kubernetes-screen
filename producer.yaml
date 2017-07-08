@@ -17,6 +17,4 @@ spec:
         env:
         - name: NODETYPE
           value: producer
-        - name: REDISLIST
-          value: redis-list
       restartPolicy: OnFailure

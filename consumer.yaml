@@ -18,12 +18,8 @@ spec:
         env:
         - name: NODETYPE
           value: consumer
-        - name: REDISLIST
-          value: redis-list
-        # Change this to your project ID.
         - name: PROJECT_ID
           value: kubernetes-screen-173105
-        # Change the following two settings to your dataset and table.
         - name: BQ_DATASET
           value: database
         - name: BQ_TABLE

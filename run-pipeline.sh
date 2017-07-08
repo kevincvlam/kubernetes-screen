@@ -5,5 +5,7 @@ bq mk database
 bq mk -t database.values schema.json
 kubectl create -f redis.yaml
 kubectl create -f redis-service.yaml
-kubectl create -f consumer.yaml 
+sleep 1
+kubectl create -f consumer.yaml
+sleep 1 
 kubectl create -f producer.yaml

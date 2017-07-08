@@ -1,13 +1,13 @@
 #!/usr/bin/env python
-"""Producer that writes values 1 to 1000 to redis queue
-   signals completion.
+"""Producer that writes values 1 to 1000 to redis queue and then signals
+   completion.
 """
 import os
 import redis
 
 REDIS_HOST = os.environ['REDISMASTER_SERVICE_HOST']
 REDIS_PORT = os.environ['REDISMASTER_SERVICE_PORT']
-REDIS_LIST = os.environ['REDISLIST']
+REDIS_LIST = 'BUFFER'
 PRODUCER_DONE = 'PRODUCER_DONE'
 
 

@@ -2,7 +2,6 @@
 """Determines to run a producer or consumer script based on environment
    variable.
 """
-
 import os
 
 NODETYPE = os.environ['NODETYPE']
