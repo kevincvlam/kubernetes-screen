@@ -3,6 +3,7 @@
    exits when queue is empty.
 """
 import os
+import time
 
 from apiclient import discovery
 import httplib2
@@ -33,15 +34,17 @@ def create_bigquery_client():
 def bq_data_insert(bigquery, project_id, dataset, table, value):
     """Insert {value, podname} into BigQuery table."""
     bq_errors = 0
-    allowed_bq_errors = 3
+    allowed_bq_errors = 5
+
+    rowlist = []
+    # Generate the data that will be sent to BigQuery
+    item = {u'value': value, u'pod_name': HOSTNAME}
+    item_row = {"json": item}
+    rowlist.append(item_row)
+    body = {"rows": rowlist}
+
     while bq_errors < allowed_bq_errors:
         try:
-            rowlist = []
-            # Generate the data that will be sent to BigQuery
-            item = {u'value': value, u'pod_name': HOSTNAME}
-            item_row = {"json": item}
-            rowlist.append(item_row)
-            body = {"rows": rowlist}
             response = bigquery.tabledata().insertAll(
                 projectId=project_id, datasetId=dataset,
                 tableId=table, body=body).execute(num_retries=NUM_RETRIES)
@@ -49,11 +52,12 @@ def bq_data_insert(bigquery, project_id, dataset, table, value):
         except Exception, e1:
             print "Big Query Error: %s" % e1
             bq_errors += 1
+            time.sleep(1)
 
 def run_consumer(bigquery):
     """ Runs the consumer, pulling from the buffer and writing results."""
     redis_errors = 0
-    allowed_redis_errors = 3
+    allowed_redis_errors = 5
     while True:
         # Get a value from the buffer
         value = None
@@ -66,6 +70,7 @@ def run_consumer(bigquery):
                 print "Too many redis errors: exiting."
                 return
             continue
+        # Write value if read is successful
         if value != None:
             print('Read ', value)
             # Write to shared database
