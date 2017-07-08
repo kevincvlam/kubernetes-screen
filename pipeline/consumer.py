@@ -58,7 +58,7 @@ def run_consumer(bigquery):
         # Get a value from the buffer
         value = None
         try:
-            value = r.brpop(REDIS_LIST)
+            value = r.brpop(REDIS_LIST,1)
         except:
             print 'Error reading from Redis.'
             redis_errors += 1
@@ -66,11 +66,12 @@ def run_consumer(bigquery):
                 print "Too many redis errors: exiting."
                 return
             continue
-        print('Read ', value)
-        # Write to shared database
-        bq_data_insert(bigquery, PROJECT_ID, os.environ['BQ_DATASET'],
-                       os.environ['BQ_TABLE'], int(value[1]))
-        print('Wrote ', value)
+        if value != None:
+            print('Read ', value)
+            # Write to shared database
+            bq_data_insert(bigquery, PROJECT_ID, os.environ['BQ_DATASET'],
+                           os.environ['BQ_TABLE'], int(value[1]))
+            print('Wrote ', value)
         # Check if can exit
         if r.llen(REDIS_LIST) == 0 and r.exists(PRODUCER_DONE):
             return

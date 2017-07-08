@@ -12,3 +12,8 @@ To clean-up:
 
 For an example of the database contents after running the pipeline see
 results.csv.
+
+To query the database:
+
+    $bq query \
+        'SELECT * FROM [kubernetes-screen-173105:database.values] LIMIT 1000'
