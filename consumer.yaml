@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: consumer
+  labels:
+    name: consumer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: consumer
+    spec:
+      containers:
+      - name: consumer
+        image: gcr.io/kubernetes-screen/pipeline:v1
+        env:
+        - name: NODETYPE
+          value: consumer
+        - name: REDISLIST
+          value: redis-list
+        # Change this to your project ID.
+        - name: PROJECT_ID
+          value: kubernetes-screen-173105
+        # Change the following two settings to your dataset and table.
+        - name: BQ_DATASET
+          value: database
+        - name: BQ_TABLE
+          value: values

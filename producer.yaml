@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: producer
+  labels:
+    name: producer
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: producer
+    spec:
+      containers:
+      - name: producer
+        image: gcr.io/kubernetes-screen-173105/pipeline:v1
+        env:
+        - name: NODETYPE
+          value: producer
+        - name: REDISLIST
+          value: redis-list

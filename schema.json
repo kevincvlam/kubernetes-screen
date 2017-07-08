@@ -1,0 +1,12 @@
+[
+  {
+    "name": "value",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "pod_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+]
