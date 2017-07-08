@@ -6,7 +6,7 @@ sudo gcloud docker -- push gcr.io/kubernetes-screen-173105/pipeline:latest
 # database
 gcloud container clusters create kubernetes-screen --scopes bigquery
 
-# Create a BigQuery database and instaniate a table with the schema in
+# Create a BigQuery database and instantiate a table with the schema in
 # schema.json
 bq mk database
 bq mk -t database.values schema.json
