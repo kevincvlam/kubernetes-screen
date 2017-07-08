@@ -62,14 +62,18 @@ def run_consumer(bigquery):
                 print "Too many redis errors: exiting."
                 return
             continue
+        print 'read %s' % value
         # Write to shared database
         bq_data_insert(bigquery, PROJECT_ID, os.environ['BQ_DATASET'],
-                       os.environ['BQ_TABLE'], value)
+                       os.environ['BQ_TABLE'], int(value[1]))
+        print 'wrote %s' % value
         # Check if can exit
         if r.llen(REDIS_LIST) == 0 and r.exists(PRODUCER_DONE):
             return
 
 if __name__ == '__main__':
-    print "starting write to BigQuery...."
+    print "Starting consumer.."
     bq = create_bigquery_client()
     run_consumer(bq)
+    #bq_data_insert(bq, PROJECT_ID, os.environ['BQ_DATASET'],
+    #               os.environ['BQ_TABLE'], 1)

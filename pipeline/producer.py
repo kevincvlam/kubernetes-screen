@@ -12,13 +12,14 @@ PRODUCER_DONE = 'PRODUCER_DONE'
 
 
 if __name__ == '__main__':
+    
     redis_errors = 0
     allowed_redis_errors = 3
     r = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=0)
 
     for i in range(1, 1000):
         try:
-            r.lpush(REDIS_LIST, i)
+            r.lpush(REDIS_LIST, '%s' % i)
         except:
             print 'Problem adding data to Redis.'
             redis_errors += 1
@@ -28,4 +29,12 @@ if __name__ == '__main__':
             break
 
     r.lpush(PRODUCER_DONE, "DONE")
+    
+    for x in range(1,10): 
+        value = r.brpop(REDIS_LIST)
+        print int(value[1])
+
+    print r.llen(REDIS_LIST)
+    print r.exists(PRODUCER_DONE)
+
 

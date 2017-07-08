@@ -1,11 +1,11 @@
-apiVersion: v1
-kind: Deployment
+apiVersion: batch/v1
+kind: Job
 metadata:
   name: consumer
   labels:
     name: consumer
 spec:
-  replicas: 1
+  parallelism: 3
   template:
     metadata:
       labels:
@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: consumer
-        image: gcr.io/kubernetes-screen/pipeline:v1
+        image: gcr.io/kubernetes-screen-173105/pipeline:v6
         env:
         - name: NODETYPE
           value: consumer
@@ -27,3 +27,4 @@ spec:
           value: database
         - name: BQ_TABLE
           value: values
+      restartPolicy: OnFailure
