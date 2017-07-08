@@ -47,6 +47,7 @@ def bq_data_insert(bigquery, project_id, dataset, table, value):
         print "Big Query Error: %s" % e1
 
 def run_consumer(bigquery):
+    """ Runs the consumer, pulling from the buffer and writing results."""
     redis_errors = 0
     allowed_redis_errors = 3
     while True:

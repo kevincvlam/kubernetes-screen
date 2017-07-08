@@ -6,9 +6,6 @@ metadata:
     name: redis-master
 spec:
   ports:
-    # The port that this service should serve on.
-    # You don't need to specify the targetPort if it is the same as the port,
-    # though here we include it anyway, to show the syntax.
   - port: 6379
     targetPort: 6379
   selector:
