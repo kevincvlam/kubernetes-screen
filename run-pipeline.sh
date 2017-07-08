@@ -6,7 +6,7 @@ sudo gcloud docker -- push gcr.io/kubernetes-screen-173105/pipeline:latest
 # database
 gcloud container clusters create kubernetes-screen --scopes bigquery
 
-# Create a BigQuery database and instaniate a table with teh schema in
+# Create a BigQuery database and instaniate a table with the schema in
 # schema.json
 bq mk database
 bq mk -t database.values schema.json
@@ -14,7 +14,5 @@ bq mk -t database.values schema.json
 # Start the pipeline 
 kubectl create -f redis.yaml
 kubectl create -f redis-service.yaml
-sleep 1
 kubectl create -f consumer.yaml
-sleep 1
 kubectl create -f producer.yaml
