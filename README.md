@@ -15,5 +15,4 @@ results.csv.
 
 To query the database:
 
-    $bq query \
-        'SELECT * FROM [kubernetes-screen-173105:database.values] LIMIT 1000'
+    $bq query 'SELECT * FROM [kubernetes-screen-173105:database.values] LIMIT 1000'
