@@ -10,9 +10,7 @@ REDIS_PORT = os.environ['REDISMASTER_SERVICE_PORT']
 REDIS_LIST = 'BUFFER'
 PRODUCER_DONE = 'PRODUCER_DONE'
 
-
 if __name__ == '__main__':
-    
     redis_errors = 0
     allowed_redis_errors = 5
     r = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=0)

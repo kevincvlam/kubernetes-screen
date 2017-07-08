@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Consumer that pulls redis queue and writes results to big query and then
+"""Consumer that polls redis queue and writes results to big query and then
    exits when queue is empty.
 """
 import os
@@ -62,7 +62,7 @@ def run_consumer(bigquery):
         # Get a value from the buffer
         value = None
         try:
-            value = r.brpop(REDIS_LIST,1)
+            value = r.brpop(REDIS_LIST, 1)
         except:
             print 'Error reading from Redis.'
             redis_errors += 1
