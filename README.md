@@ -1,30 +1,11 @@
 A simple producer consumer pipeline.
 
-To run make sure you have a cluster available to use:
+Before running, you'll need to replace all instances of the project-id, "kubernetes-screen-173105" with your own Google Cloud Engine project-id. 
 
-    $ gcloud container clusters create kubernetes-screen --scopes bigquery
-
-Then setup a bigquery dataset and table:
-
-    $ ./setup_bq.sh
-
-Setup the buffer and consumers:
+To run:
     
-    $ ./setup_inputs_and_consumers.sh
+    $./run-pipeline.sh
 
-Run the producer:
+To clean-up:
 
-    $ ./run_producer.sh
-
-Dump Shared Database Table:
-    
-    $
-
-Clean-up:
-
-    $ gcloud container clusters delete kubernetes-screen
-
-Updating docker image
-
-    $ sudo docker build -t gcr.io/kubernetes-screen-173105/pipeline:vX pipeline
-    $ sudo gcloud docker -- push gcr.io/kubernetes-screen-173105/pipeline:vX
+    $./clean-up-pipeline.sh

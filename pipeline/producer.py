@@ -29,12 +29,3 @@ if __name__ == '__main__':
             break
 
     r.lpush(PRODUCER_DONE, "DONE")
-    
-    for x in range(1,10): 
-        value = r.brpop(REDIS_LIST)
-        print int(value[1])
-
-    print r.llen(REDIS_LIST)
-    print r.exists(PRODUCER_DONE)
-
-
