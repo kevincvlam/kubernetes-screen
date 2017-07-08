@@ -9,3 +9,6 @@ To run:
 To clean-up:
 
     $./clean-up-pipeline.sh
+
+For an example of the database contents after running the pipeline see
+results.csv.
